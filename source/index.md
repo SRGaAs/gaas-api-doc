@@ -24,7 +24,7 @@ It's all design for developers to easily use it, you can use our API to access G
 We have language bindings in Shell and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 
-This example API documentation page was created with [GAAS](https://trygaas.com). 
+This example API documentation page was created with [GAAS](http://trygaas.com). 
 
 # Authentication
 
@@ -32,7 +32,7 @@ This example API documentation page was created with [GAAS](https://trygaas.com)
 
 To authorize, use this code:
 
-GAAS uses API Token to allow access to the API. You can register a new GAAS API Token at our [Dashboard](https://trygaas.com).
+GAAS uses API Token to allow access to the API. You can register a new GAAS API Token at our [Dashboard](http://trygaas.com).
 
 Kittn expects for the API Token to be included in all API requests to the server in params that looks like the following:
 
@@ -75,7 +75,7 @@ curl "api_endpoint_here"
   "achievements": [
     {
       "id": 1,
-      "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+      "icon_url": "http://trygaas.com/images/your_iconurl.jpg",
       "name": "Achievement 1",
       "description": "Achievement 1 description",
       "is_completed": true,
@@ -117,7 +117,7 @@ All achievement objects will be base on a user (your user, identify by your user
 ```json
 {
   "id": 1,
-  "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+  "icon_url": "http://trygaas.com/images/your_iconurl.jpg",
   "name": "Achievement 1",
   "description": "Achievement 1 description",
   "is_completed": true,
@@ -157,7 +157,7 @@ curl "api_endpoint_here"
 [
   {
     "id": 1,
-    "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+    "icon_url": "http://trygaas.com/images/your_iconurl.jpg",
     "name": "Achievement 1",
     "description": "Achievement 1 description",
     "is_completed": true,
@@ -165,7 +165,7 @@ curl "api_endpoint_here"
   },
   {
     "id": 2,
-    "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+    "icon_url": "http://trygaas.com/images/your_iconurl.jpg",
     "name": "Achievement 2",
     "description": "Achievement 2 description",
     "is_completed": false,
