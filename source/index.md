@@ -28,23 +28,6 @@ This example API documentation page was created with [GAAS](https://trygaas.com)
 
 # Authentication
 
-> To authorize, use this code:
-
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
 
 
 To authorize, use this code:
@@ -65,8 +48,7 @@ You must replace <code>your-api-token</code> with your projetc's API Token.
 ## Send Event
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl -X POST 'http://trygaas/api/v1/events?name=my_event&user_id=tw_no_1&api_token=your_api_token'
 ```
 
 ```javascript
@@ -80,23 +62,28 @@ curl "api_endpoint_here"
 
 
 ```json
-[]
+{
+  "achievements": []
+}
 ```
 
 
 > Return: If your user got achievement through this event, return array of achievement objects.
 
 ```json
-[
-  {
-    "id": 1,
-    "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
-    "name": "Achievement 1",
-    "description": "Achievement 1 description",
-    "is_completed": true,
-    "percentage": 100.0
-  }
-]
+{
+  "achievements": [
+    {
+      "id": 1,
+      "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+      "name": "Achievement 1",
+      "description": "Achievement 1 description",
+      "is_completed": true,
+      "percentage": 100.0
+    }
+  ]
+}
+
 ```
 
 
@@ -154,8 +141,7 @@ percentage | String | To see how many percentage of condition your user got to a
 
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl -X GET 'http://trygaas/api/v1/achievements?user_id=tw_no_1&api_token=your_api_token'
 ```
 
 ```javascript
