@@ -3,12 +3,11 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
+  - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='http://trygaas.com'>Sign Up for an API Token</a>
+  - <a href='http://trygaas.com'>GAAS</a>
 
 includes:
   - errors
@@ -18,27 +17,19 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to GAAS API Doc, GAAS is the service help you gorwth your user's retention rate with achievement system.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+It's all design for developers to easily use it, you can use our API to access GAAS API endpoints, which can auto help you manage your user's achevement in our service.
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+We have language bindings in Shell and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+
+
+This example API documentation page was created with [GAAS](https://trygaas.com). 
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
 
 ```shell
 # With shell, you can just pass the correct header with each request
@@ -46,123 +37,170 @@ curl "api_endpoint_here"
   -H "Authorization: meowmeowmeow"
 ```
 
+```javascript
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
+To authorize, use this code:
+
+GAAS uses API Token to allow access to the API. You can register a new GAAS API Token at our [Dashboard](https://trygaas.com).
+
+Kittn expects for the API Token to be included in all API requests to the server in params that looks like the following:
+
+`{ "api_token": "your-api-token" }`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>your-api-token</code> with your projetc's API Token.
 </aside>
 
-# Kittens
 
-## Get All Kittens
+# Events
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Send Event
 
 ```shell
 curl "http://example.com/api/kittens"
   -H "Authorization: meowmeowmeow"
 ```
 
-> The above command returns JSON structured like this:
+```javascript
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
+
+> Return: If your user didn't get achievement through this event, return empty array.
+
+
+```json
+[]
+```
+
+
+> Return: If your user got achievement through this event, return array of achievement objects.
 
 ```json
 [
   {
     "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+    "name": "Achievement 1",
+    "description": "Achievement 1 description",
+    "is_completed": true,
+    "percentage": 100.0
   }
 ]
 ```
 
-This endpoint retrieves all kittens.
+
+This endpoint send an event to GAAS, we return `Achievement` object back only if your user achieve it through this event.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST http://trygaas/api/v1/events`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Type | Required | Description
+--------- | ---- | -------- | -----------
+name | String | true | Event name, set it from your project
+user_id | String | true | Your user's uniq ID.
+api_token | String | true | Your project's API Token.
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Notice — there are no "Event" object returned, only "Achievement" will be returned.
 </aside>
 
-## Get a Specific Kitten
 
-```ruby
-require 'kittn'
+# Achievement
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+## Describe Achievement object
 
-```python
-import kittn
+All achievement objects will be base on a user (your user, identify by your user_id params)
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
+> All Achievements object looks like this
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": 1,
+  "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+  "name": "Achievement 1",
+  "description": "Achievement 1 description",
+  "is_completed": true,
+  "percentage": 100.0
 }
 ```
 
-This endpoint retrieves a specific kitten.
+Attribute | Type | Meaning |
+--------- | ---- | -------- |
+id | String | Achievement ID
+icon_url | String | Achievement badge icon's url
+name | String | Achievement name
+description | String | Achievement description
+is_completed | String | To see if your user achieved this Achievement or not
+percentage | String | To see how many percentage of condition your user got to achieved this Achievement
 
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
+
+
+
+## Retrieve All Achievements
+
+
+```shell
+curl "http://example.com/api/kittens"
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here"
+  -H "Authorization: meowmeowmeow"
+```
+
+> Return
+
+
+```json
+[
+  {
+    "id": 1,
+    "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+    "name": "Achievement 1",
+    "description": "Achievement 1 description",
+    "is_completed": true,
+    "percentage": 100.0
+  },
+  {
+    "id": 2,
+    "icon_url": "https://trygaas.com/images/your_iconurl.jpg",
+    "name": "Achievement 2",
+    "description": "Achievement 2 description",
+    "is_completed": false,
+    "percentage": 50.0
+  }
+]
+```
+
+
+Retrieve all achievements for a specific user
+
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://trygaas/api/v1/achievements`
 
-### URL Parameters
+### Query Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Parameter | Type | Required | Description
+--------- | ---- | -------- | -----------
+user_id | String | true | Your user's uniq ID.
+api_token | String | true | Your project's API Token.
+
 
