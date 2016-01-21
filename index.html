@@ -57,22 +57,6 @@
 
 <h1 id="authentication">Authentication</h1>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="err">#</span> <span class="nx">With</span> <span class="nx">shell</span><span class="p">,</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">just</span> <span class="nx">pass</span> <span class="nx">the</span> <span class="nx">correct</span> <span class="nx">header</span> <span class="kd">with</span> <span class="nx">each</span> <span class="nx">request</span>
-<span class="nx">curl</span> <span class="s2">"api_endpoint_here"</span>
-  <span class="o">-</span><span class="nx">H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
 <p>To authorize, use this code:</p>
 
 <p>GAAS uses API Token to allow access to the API. You can register a new GAAS API Token at our <a href="https://trygaas.com">Dashboard</a>.</p>
@@ -88,8 +72,7 @@ You must replace <code>your-api-token</code> with your projetc&rsquo;s API Token
 <h1 id="events">Events</h1>
 
 <h2 id="send-event">Send Event</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code>curl -X POST <span class="s1">'http://trygaas/api/v1/events?name=my_event&amp;user_id=tw_no_1&amp;api_token=your_api_token'</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="err">#</span> <span class="nx">With</span> <span class="nx">shell</span><span class="p">,</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">just</span> <span class="nx">pass</span> <span class="nx">the</span> <span class="nx">correct</span> <span class="nx">header</span> <span class="kd">with</span> <span class="nx">each</span> <span class="nx">request</span>
 <span class="nx">curl</span> <span class="s2">"api_endpoint_here"</span>
@@ -99,22 +82,27 @@ You must replace <code>your-api-token</code> with your projetc&rsquo;s API Token
 <blockquote>
 <p>Return: If your user didn&rsquo;t get achievement through this event, return empty array.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"achievements"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <blockquote>
 <p>Return: If your user got achievement through this event, return array of achievement objects.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"icon_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://trygaas.com/images/your_iconurl.jpg"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Achievement 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Achievement 1 description"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"is_completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"achievements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"icon_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://trygaas.com/images/your_iconurl.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Achievement 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Achievement 1 description"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_completed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 
 <p>This endpoint send an event to GAAS, we return <code class="prettyprint">Achievement</code> object back only if your user achieve it through this event.</p>
@@ -216,8 +204,7 @@ Notice — there are no &ldquo;Event&rdquo; object returned, only &ldquo;Achieve
 </tbody></table>
 
 <h2 id="retrieve-all-achievements">Retrieve All Achievements</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code>curl -X GET <span class="s1">'http://trygaas/api/v1/achievements?user_id=tw_no_1&amp;api_token=your_api_token'</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="err">#</span> <span class="nx">With</span> <span class="nx">shell</span><span class="p">,</span> <span class="nx">you</span> <span class="nx">can</span> <span class="nx">just</span> <span class="nx">pass</span> <span class="nx">the</span> <span class="nx">correct</span> <span class="nx">header</span> <span class="kd">with</span> <span class="nx">each</span> <span class="nx">request</span>
 <span class="nx">curl</span> <span class="s2">"api_endpoint_here"</span>
